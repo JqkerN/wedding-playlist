@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class IdVote {
+public class Vote {
     private Integer guestId;
     private Integer trackId;
 }

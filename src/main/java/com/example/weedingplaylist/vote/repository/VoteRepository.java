@@ -1,8 +1,8 @@
 package com.example.weedingplaylist.vote.repository;
 
-import com.example.weedingplaylist.vote.model.IdVote;
-import com.example.weedingplaylist.vote.model.NameTitleVote;
-import com.example.weedingplaylist.vote.model.VoteCount;
+import com.example.weedingplaylist.vote.model.Vote;
+import com.example.weedingplaylist.vote.dto.NameTitleVote;
+import com.example.weedingplaylist.vote.dto.VoteCount;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -70,11 +70,11 @@ public class VoteRepository implements IVoteRepository{
     }
 
     @Override
-    public int save(IdVote idVote) {
+    public int save(Vote vote) {
         String sql = """
                 INSERT INTO tracks(trackId, guestId) VALUE(?, ?);
                 """;
-        return jdbcTemplate.update(sql, idVote.getTrackId(), idVote.getGuestId());
+        return jdbcTemplate.update(sql, vote.getTrackId(), vote.getGuestId());
     }
 
     @Override

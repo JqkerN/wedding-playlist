@@ -1,8 +1,8 @@
 package com.example.weedingplaylist.vote.controller;
 
 import com.example.weedingplaylist.vote.dto.VoteRequest;
-import com.example.weedingplaylist.vote.model.NameTitleVote;
-import com.example.weedingplaylist.vote.model.VoteCount;
+import com.example.weedingplaylist.vote.dto.NameTitleVote;
+import com.example.weedingplaylist.vote.dto.VoteCount;
 import com.example.weedingplaylist.vote.service.PlaylistVoteService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

@@ -8,9 +8,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.example.weedingplaylist.vote.model.IdVote;
-import com.example.weedingplaylist.vote.model.NameTitleVote;
-import com.example.weedingplaylist.vote.model.VoteCount;
+import com.example.weedingplaylist.vote.model.Vote;
+import com.example.weedingplaylist.vote.dto.NameTitleVote;
+import com.example.weedingplaylist.vote.dto.VoteCount;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,18 +74,18 @@ class VoteRepositoryTest {
     }
 
     /**
-     * Method under test: {@link VoteRepository#save(IdVote)}
+     * Method under test: {@link VoteRepository#save(Vote)}
      */
     @Test
     void testSave() throws DataAccessException {
         when(jdbcTemplate.update((String) any(), (Object[]) any())).thenReturn(1);
-        IdVote idVote = mock(IdVote.class);
-        when(idVote.getGuestId()).thenReturn(123);
-        when(idVote.getTrackId()).thenReturn(123);
-        assertEquals(1, voteRepository.save(idVote));
+        Vote vote = mock(Vote.class);
+        when(vote.getGuestId()).thenReturn(123);
+        when(vote.getTrackId()).thenReturn(123);
+        assertEquals(1, voteRepository.save(vote));
         verify(jdbcTemplate).update((String) any(), (Object[]) any());
-        verify(idVote).getGuestId();
-        verify(idVote).getTrackId();
+        verify(vote).getGuestId();
+        verify(vote).getTrackId();
     }
 
     /**

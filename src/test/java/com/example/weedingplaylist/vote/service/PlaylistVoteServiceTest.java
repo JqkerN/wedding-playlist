@@ -14,9 +14,9 @@ import com.example.weedingplaylist.guest.repository.IGuestRepository;
 import com.example.weedingplaylist.playlist.model.Track;
 import com.example.weedingplaylist.playlist.repository.IPlaylistRepository;
 import com.example.weedingplaylist.vote.dto.VoteRequest;
-import com.example.weedingplaylist.vote.model.IdVote;
-import com.example.weedingplaylist.vote.model.NameTitleVote;
-import com.example.weedingplaylist.vote.model.VoteCount;
+import com.example.weedingplaylist.vote.model.Vote;
+import com.example.weedingplaylist.vote.dto.NameTitleVote;
+import com.example.weedingplaylist.vote.dto.VoteCount;
 import com.example.weedingplaylist.vote.repository.IVoteRepository;
 
 import java.util.ArrayList;
@@ -119,7 +119,7 @@ class PlaylistVoteServiceTest {
      */
     @Test
     void testAddVote() {
-        when(iVoteRepository.save((IdVote) any())).thenReturn(1);
+        when(iVoteRepository.save((Vote) any())).thenReturn(1);
         Guest guest = mock(Guest.class);
         when(guest.getId()).thenReturn(1);
         when(iGuestRepository.findByFullName((String) any())).thenReturn(guest);
@@ -127,7 +127,7 @@ class PlaylistVoteServiceTest {
         when(track.getId()).thenReturn(1);
         when(iPlaylistRepository.findByTitle((String) any())).thenReturn(track);
         playlistVoteService.addVote(new VoteRequest("Dr Jane Doe", "Dr"));
-        verify(iVoteRepository).save((IdVote) any());
+        verify(iVoteRepository).save((Vote) any());
         verify(iGuestRepository).findByFullName((String) any());
         verify(guest).getId();
         verify(iPlaylistRepository).findByTitle((String) any());
@@ -139,7 +139,7 @@ class PlaylistVoteServiceTest {
      */
     @Test
     void testAddVote2() {
-        when(iVoteRepository.save((IdVote) any())).thenReturn(1);
+        when(iVoteRepository.save((Vote) any())).thenReturn(1);
         Guest guest = mock(Guest.class);
         when(guest.getId()).thenReturn(1);
         when(iGuestRepository.findByFullName((String) any())).thenReturn(guest);
@@ -159,7 +159,7 @@ class PlaylistVoteServiceTest {
      */
     @Test
     void testAddVote3() {
-        when(iVoteRepository.save((IdVote) any())).thenReturn(0);
+        when(iVoteRepository.save((Vote) any())).thenReturn(0);
         Guest guest = mock(Guest.class);
         when(guest.getId()).thenThrow(new GustNotFoundException("An error occurred"));
         when(iGuestRepository.findByFullName((String) any())).thenReturn(guest);
@@ -189,7 +189,7 @@ class PlaylistVoteServiceTest {
         //   addVote(VoteRequest).
         //   See https://diff.blue/R013 to resolve this issue.
 
-        when(iVoteRepository.save((IdVote) any())).thenReturn(0);
+        when(iVoteRepository.save((Vote) any())).thenReturn(0);
         when(iGuestRepository.findByFullName((String) any())).thenReturn(mock(Guest.class));
         new GustNotFoundException("An error occurred");
         when(iPlaylistRepository.findByTitle((String) any())).thenReturn(mock(Track.class));

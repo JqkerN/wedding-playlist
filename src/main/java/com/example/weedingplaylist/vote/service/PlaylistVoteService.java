@@ -5,11 +5,11 @@ import com.example.weedingplaylist.guest.repository.IGuestRepository;
 import com.example.weedingplaylist.exception.TrackNotFoundException;
 import com.example.weedingplaylist.playlist.model.Track;
 import com.example.weedingplaylist.playlist.repository.IPlaylistRepository;
-import com.example.weedingplaylist.vote.model.IdVote;
+import com.example.weedingplaylist.vote.model.Vote;
 import com.example.weedingplaylist.vote.dto.VoteRequest;
 import com.example.weedingplaylist.exception.GustNotFoundException;
-import com.example.weedingplaylist.vote.model.NameTitleVote;
-import com.example.weedingplaylist.vote.model.VoteCount;
+import com.example.weedingplaylist.vote.dto.NameTitleVote;
+import com.example.weedingplaylist.vote.dto.VoteCount;
 import com.example.weedingplaylist.vote.repository.IVoteRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -46,12 +46,12 @@ public class PlaylistVoteService {
             throw new TrackNotFoundException("Track with the title["+voteRequest.getTitle()+"] does not exist.");
         }
 
-        IdVote idVote = IdVote.builder()
+        Vote vote = Vote.builder()
                 .guestId(guest.getId())
                 .trackId(track.getId())
                 .build();
 
-        voteRepository.save(idVote);
+        voteRepository.save(vote);
     }
 
     public void removeVote(Integer id) {

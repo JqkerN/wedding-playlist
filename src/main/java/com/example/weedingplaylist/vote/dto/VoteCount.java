@@ -1,4 +1,4 @@
-package com.example.weedingplaylist.vote.model;
+package com.example.weedingplaylist.vote.dto;
 
 import lombok.Builder;
 import lombok.Getter;
