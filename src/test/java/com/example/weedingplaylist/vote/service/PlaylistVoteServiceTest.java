@@ -8,7 +8,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.example.weedingplaylist.exception.GustNotFoundException;
+import com.example.weedingplaylist.exception.GuestNotFoundException;
 import com.example.weedingplaylist.guest.model.Guest;
 import com.example.weedingplaylist.guest.repository.IGuestRepository;
 import com.example.weedingplaylist.playlist.model.Track;
@@ -63,8 +63,8 @@ class PlaylistVoteServiceTest {
      */
     @Test
     void testGetAllVotes2() {
-        when(iVoteRepository.findAll()).thenThrow(new GustNotFoundException("An error occurred"));
-        assertThrows(GustNotFoundException.class, () -> playlistVoteService.getAllVotes());
+        when(iVoteRepository.findAll()).thenThrow(new GuestNotFoundException("An error occurred"));
+        assertThrows(GuestNotFoundException.class, () -> playlistVoteService.getAllVotes());
         verify(iVoteRepository).findAll();
     }
 
@@ -86,8 +86,8 @@ class PlaylistVoteServiceTest {
      */
     @Test
     void testGetAllVotes4() {
-        when(iVoteRepository.findAllByTrackId((Integer) any())).thenThrow(new GustNotFoundException("An error occurred"));
-        assertThrows(GustNotFoundException.class, () -> playlistVoteService.getAllVotes(123));
+        when(iVoteRepository.findAllByTrackId((Integer) any())).thenThrow(new GuestNotFoundException("An error occurred"));
+        assertThrows(GuestNotFoundException.class, () -> playlistVoteService.getAllVotes(123));
         verify(iVoteRepository).findAllByTrackId((Integer) any());
     }
 
@@ -109,8 +109,8 @@ class PlaylistVoteServiceTest {
      */
     @Test
     void testGetVotesPerTrackIds2() {
-        when(iVoteRepository.countGuestIdPerTrackId()).thenThrow(new GustNotFoundException("An error occurred"));
-        assertThrows(GustNotFoundException.class, () -> playlistVoteService.getVotesPerTrackIds());
+        when(iVoteRepository.countGuestIdPerTrackId()).thenThrow(new GuestNotFoundException("An error occurred"));
+        assertThrows(GuestNotFoundException.class, () -> playlistVoteService.getVotesPerTrackIds());
         verify(iVoteRepository).countGuestIdPerTrackId();
     }
 
@@ -144,9 +144,9 @@ class PlaylistVoteServiceTest {
         when(guest.getId()).thenReturn(1);
         when(iGuestRepository.findByFullName((String) any())).thenReturn(guest);
         Track track = mock(Track.class);
-        when(track.getId()).thenThrow(new GustNotFoundException("An error occurred"));
+        when(track.getId()).thenThrow(new GuestNotFoundException("An error occurred"));
         when(iPlaylistRepository.findByTitle((String) any())).thenReturn(track);
-        assertThrows(GustNotFoundException.class,
+        assertThrows(GuestNotFoundException.class,
                 () -> playlistVoteService.addVote(new VoteRequest("Dr Jane Doe", "Dr")));
         verify(iGuestRepository).findByFullName((String) any());
         verify(guest).getId();
@@ -161,10 +161,10 @@ class PlaylistVoteServiceTest {
     void testAddVote3() {
         when(iVoteRepository.save((Vote) any())).thenReturn(0);
         Guest guest = mock(Guest.class);
-        when(guest.getId()).thenThrow(new GustNotFoundException("An error occurred"));
+        when(guest.getId()).thenThrow(new GuestNotFoundException("An error occurred"));
         when(iGuestRepository.findByFullName((String) any())).thenReturn(guest);
         when(iPlaylistRepository.findByTitle((String) any())).thenReturn(mock(Track.class));
-        assertThrows(GustNotFoundException.class,
+        assertThrows(GuestNotFoundException.class,
                 () -> playlistVoteService.addVote(new VoteRequest("Dr Jane Doe", "Dr")));
         verify(iGuestRepository).findByFullName((String) any());
         verify(guest).getId();
@@ -191,7 +191,7 @@ class PlaylistVoteServiceTest {
 
         when(iVoteRepository.save((Vote) any())).thenReturn(0);
         when(iGuestRepository.findByFullName((String) any())).thenReturn(mock(Guest.class));
-        new GustNotFoundException("An error occurred");
+        new GuestNotFoundException("An error occurred");
         when(iPlaylistRepository.findByTitle((String) any())).thenReturn(mock(Track.class));
         playlistVoteService.addVote(null);
     }
@@ -211,8 +211,8 @@ class PlaylistVoteServiceTest {
      */
     @Test
     void testRemoveVote2() {
-        when(iVoteRepository.deleteById((Integer) any())).thenThrow(new GustNotFoundException("An error occurred"));
-        assertThrows(GustNotFoundException.class, () -> playlistVoteService.removeVote(1));
+        when(iVoteRepository.deleteById((Integer) any())).thenThrow(new GuestNotFoundException("An error occurred"));
+        assertThrows(GuestNotFoundException.class, () -> playlistVoteService.removeVote(1));
         verify(iVoteRepository).deleteById((Integer) any());
     }
 }

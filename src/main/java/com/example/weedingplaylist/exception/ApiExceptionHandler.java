@@ -36,8 +36,8 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(apiException, apiException.httpStatus());
     }
 
-    @ExceptionHandler(value = {GustNotFoundException.class})
-    public ResponseEntity<Object> handleApiRequestException(GustNotFoundException e) {
+    @ExceptionHandler(value = {GuestNotFoundException.class})
+    public ResponseEntity<Object> handleApiRequestException(GuestNotFoundException e) {
         log.error(e.getMessage(), e);
 
         ApiException apiException = new ApiException(
