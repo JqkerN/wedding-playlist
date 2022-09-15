@@ -1,0 +1,11 @@
+spring:
+    application:
+        name: weeding-playlist
+    datasource:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/weeding-playlist
+        username: root
+        password: 1234
+    jpa:
+        database-platform: org.hibernate.dialect.MySQL57InnoDBDialect
+        show-sql: true
