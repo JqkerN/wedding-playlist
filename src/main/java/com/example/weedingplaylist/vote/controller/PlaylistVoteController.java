@@ -7,6 +7,7 @@ import com.example.weedingplaylist.vote.service.PlaylistVoteService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,7 +27,7 @@ public class PlaylistVoteController {
     }
 
     @PostMapping("/playlist/votes")
-    public void addVote(@RequestBody VoteRequest voteRequest){
+    public void addVote(@Valid @RequestBody VoteRequest voteRequest){
         playlistVoteService.addVote(voteRequest);
     }
 

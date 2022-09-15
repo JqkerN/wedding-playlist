@@ -6,6 +6,7 @@ import com.example.weedingplaylist.playlist.dto.TrackRegisterRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,7 +22,7 @@ public class PlaylistController {
     }
 
     @PostMapping
-    public void addTrack(@RequestBody TrackRegisterRequest trackRegisterRequest) {
+    public void addTrack(@Valid @RequestBody TrackRegisterRequest trackRegisterRequest) {
         playlistService.addTrack(trackRegisterRequest);
     }
 
