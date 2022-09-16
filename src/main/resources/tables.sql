@@ -9,10 +9,34 @@ fullName varchar(255)
 );
 
 CREATE TABLE `weeding-playlist`.`votes`(
-id int PRIMARY KEY AUTO_INCREMENT,
+id int AUTO_INCREMENT,
 trackId int,
 guestId int,
 PRIMARY KEY(trackId, guestId),
 FOREIGN KEY (trackId) REFERENCES tracks(id),
 FOREIGN KEY (guestId) REFERENCES guests(id)
 );
+
+
+
+CREATE TABLE `tracks`(
+id int PRIMARY KEY AUTO_INCREMENT,
+title varchar(255) UNIQUE
+);
+
+CREATE TABLE `guests`(
+id int PRIMARY KEY AUTO_INCREMENT,
+fullName varchar(255)
+);
+
+CREATE TABLE `votes`(
+id int AUTO_INCREMENT,
+trackId int,
+guestId int,
+PRIMARY KEY(trackId, guestId),
+FOREIGN KEY (trackId) REFERENCES tracks(id),
+FOREIGN KEY (guestId) REFERENCES guests(id)
+);
+
+
+

@@ -72,7 +72,7 @@ public class VoteRepository implements IVoteRepository{
     @Override
     public int save(Vote vote) {
         String sql = """
-                INSERT INTO tracks(trackId, guestId) VALUE(?, ?);
+                INSERT INTO votes(trackId, guestId) VALUE(?, ?);
                 """;
         return jdbcTemplate.update(sql, vote.getTrackId(), vote.getGuestId());
     }

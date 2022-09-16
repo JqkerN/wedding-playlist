@@ -30,7 +30,7 @@ public class ApiExceptionHandler {
 
         ApiException apiException = new ApiException(
                 e.getMessage(),
-                HttpStatus.BAD_REQUEST,
+                HttpStatus.NOT_FOUND,
                 ZonedDateTime.now()
         );
         return new ResponseEntity<>(apiException, apiException.httpStatus());
@@ -42,7 +42,7 @@ public class ApiExceptionHandler {
 
         ApiException apiException = new ApiException(
                 e.getMessage(),
-                HttpStatus.BAD_REQUEST,
+                HttpStatus.NOT_FOUND,
                 ZonedDateTime.now()
         );
         return new ResponseEntity<>(apiException, apiException.httpStatus());
