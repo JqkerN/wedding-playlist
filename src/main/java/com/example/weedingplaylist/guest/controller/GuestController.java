@@ -6,6 +6,7 @@ import com.example.weedingplaylist.guest.service.GuestService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,7 @@ public class GuestController {
     }
 
     @PostMapping
-    public void registerGuest(@RequestBody RegistrationRequest request) {
+    public void registerGuest(@Valid @RequestBody RegistrationRequest request) {
         guestService.addGuest(request);
     }
 
