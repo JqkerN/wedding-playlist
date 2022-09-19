@@ -1,15 +1,15 @@
-CREATE TABLE `weeding-playlist`.`tracks`(
+CREATE TABLE `wedding`.`tracks`(
 id int PRIMARY KEY AUTO_INCREMENT,
 title varchar(255) UNIQUE
 );
 
-CREATE TABLE `weeding-playlist`.`guests`(
+CREATE TABLE `wedding`.`guests`(
 id int PRIMARY KEY AUTO_INCREMENT,
 fullName varchar(255)
 );
 
-CREATE TABLE `weeding-playlist`.`votes`(
-id int AUTO_INCREMENT,
+CREATE TABLE `wedding`.`votes`(
+id int NOT NULL AUTO_INCREMENT,
 trackId int,
 guestId int,
 PRIMARY KEY(trackId, guestId),
@@ -30,7 +30,7 @@ fullName varchar(255)
 );
 
 CREATE TABLE `votes`(
-id int AUTO_INCREMENT,
+id int NOT NULL AUTO_INCREMENT,
 trackId int,
 guestId int,
 PRIMARY KEY(trackId, guestId),
