@@ -35,6 +35,26 @@ public class VoteRepository implements IVoteRepository{
     }
 
     @Override
+    public List<NameTitleVote> findVote(Vote vote) {
+        String sql = """
+                SELECT votes.id, guests.fullName, tracks.title
+                FROM votes
+                INNER JOIN guests ON guestId = guests.id
+                INNER JOIN tracks ON trackId = tracks.id
+                WHERE guestId = ? AND trackId = ?;
+                """;
+        return jdbcTemplate.query(sql,
+                (rs, rowNum) -> NameTitleVote.builder()
+                        .id(rs.getInt("id"))
+                        .fullName(rs.getString("fullName"))
+                        .title(rs.getString("title"))
+                        .build(),
+                vote.getGuestId(),
+                vote.getTrackId()
+        );
+    }
+
+    @Override
     public List<NameTitleVote> findAllByTrackId(Integer trackId) {
         String sql = """
                 SELECT votes.id, guests.fullName, tracks.title
@@ -50,6 +70,25 @@ public class VoteRepository implements IVoteRepository{
                         .title(rs.getString("title"))
                         .build(),
                 trackId
+        );
+    }
+
+    @Override
+    public List<NameTitleVote> findAllByGuestId(Integer guestId) {
+        String sql = """
+                SELECT votes.id, guests.fullName, tracks.title
+                FROM votes
+                INNER JOIN guests ON guestId = guests.id
+                INNER JOIN tracks ON trackId = tracks.id
+                WHERE guests.id = ?;
+                """;
+        return jdbcTemplate.query(sql,
+                (rs, rowNum) -> NameTitleVote.builder()
+                        .id(rs.getInt("id"))
+                        .fullName(rs.getString("fullName"))
+                        .title(rs.getString("title"))
+                        .build(),
+                guestId
         );
     }
 

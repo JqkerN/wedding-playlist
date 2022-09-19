@@ -47,4 +47,29 @@ public class ApiExceptionHandler {
         );
         return new ResponseEntity<>(apiException, apiException.httpStatus());
     }
+
+    @ExceptionHandler(value = {UserAlreadyExistException.class})
+    public ResponseEntity<Object> handleApiRequestException(UserAlreadyExistException e) {
+        log.error(e.getMessage(), e);
+
+        ApiException apiException = new ApiException(
+                e.getMessage(),
+                HttpStatus.BAD_REQUEST,
+                ZonedDateTime.now()
+        );
+        return new ResponseEntity<>(apiException, apiException.httpStatus());
+    }
+
+    @ExceptionHandler(value = {VoteAlreadyExistException.class})
+    public ResponseEntity<Object> handleApiRequestException(VoteAlreadyExistException e) {
+        log.error(e.getMessage(), e);
+
+        ApiException apiException = new ApiException(
+                e.getMessage(),
+                HttpStatus.BAD_REQUEST,
+                ZonedDateTime.now()
+        );
+        return new ResponseEntity<>(apiException, apiException.httpStatus());
+    }
+
 }

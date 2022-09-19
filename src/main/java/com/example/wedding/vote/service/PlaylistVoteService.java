@@ -1,5 +1,6 @@
 package com.example.wedding.vote.service;
 
+import com.example.wedding.exception.VoteAlreadyExistException;
 import com.example.wedding.guest.model.Guest;
 import com.example.wedding.guest.repository.IGuestRepository;
 import com.example.wedding.exception.TrackNotFoundException;
@@ -46,10 +47,15 @@ public class PlaylistVoteService {
             throw new TrackNotFoundException("Track with the title["+voteRequest.getTitle()+"] does not exist.");
         }
 
+        // TODO: Change from guest id to user id!!
         Vote vote = Vote.builder()
                 .guestId(guest.getId())
                 .trackId(track.getId())
                 .build();
+
+        if (voteRepository.findVote(vote) != null) {
+            throw new VoteAlreadyExistException("Vote for full name["+voteRequest.getFullName()+"] and title["+voteRequest.getTitle()+"] already exists, cannot have multiple votes from the same user and title.");
+        }
 
         voteRepository.save(vote);
     }

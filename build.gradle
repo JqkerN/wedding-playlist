@@ -20,10 +20,11 @@ repositories {
 
 dependencies {
 	implementation "io.springfox:springfox-boot-starter:3.0.0"
-	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'

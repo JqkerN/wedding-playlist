@@ -9,7 +9,11 @@ import java.util.List;
 public interface IVoteRepository {
     List<NameTitleVote> findAll();
 
+    List<NameTitleVote> findVote(Vote vote);
+
     List<NameTitleVote> findAllByTrackId(Integer trackId);
+
+    List<NameTitleVote> findAllByGuestId(Integer guestId);
 
     List<VoteCount> countGuestIdPerTrackId();
 
