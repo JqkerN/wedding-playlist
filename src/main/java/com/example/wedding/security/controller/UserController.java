@@ -3,14 +3,14 @@ package com.example.wedding.security.controller;
 import com.example.wedding.security.dto.RegistrerUserRequest;
 import com.example.wedding.security.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Profile("dev")
+@ApiIgnore
 @RestController
 @RequestMapping("/admin/api/v1/users")
 @AllArgsConstructor
