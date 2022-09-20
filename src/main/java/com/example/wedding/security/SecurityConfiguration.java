@@ -1,5 +1,6 @@
 package com.example.wedding.security;
 
+import com.example.wedding.security.model.Role;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +23,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/api/v1/**").access("hasRole('"+Role.USER+"') or hasRole('"+Role.ADMIN+"')")
+                .antMatchers("/api/v1/**").access("hasRole('"+ Role.USER+"') or hasRole('"+Role.ADMIN+"')")
                 .antMatchers("/admin/api/v1/**").access("hasRole('"+Role.ADMIN+"')")
                 .and().httpBasic().and().csrf().disable();;
         return http.build();

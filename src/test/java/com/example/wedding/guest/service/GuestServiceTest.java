@@ -44,37 +44,6 @@ class GuestServiceTest {
         verify(iGuestRepository).findAll();
     }
 
-    /**
-     * Method under test: {@link GuestService#addGuest(RegistrationRequest)}
-     */
-    @Test
-    void testAddGuest() {
-        when(iGuestRepository.save((Guest) any())).thenReturn(1);
-        guestService.addGuest(new RegistrationRequest("Dr Jane Doe"));
-        verify(iGuestRepository).save((Guest) any());
-    }
-
-    /**
-     * Method under test: {@link GuestService#addGuest(RegistrationRequest)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testAddGuest2() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException: Cannot invoke "com.example.weedingplaylist.guest.dto.RegistrationRequest.getFullName()" because "request" is null
-        //       at com.example.weedingplaylist.guest.service.GuestService.addGuest(GuestService.java:22)
-        //   In order to prevent addGuest(RegistrationRequest)
-        //   from throwing NullPointerException, add constructors or factory
-        //   methods that make it easier to construct fully initialized objects used in
-        //   addGuest(RegistrationRequest).
-        //   See https://diff.blue/R013 to resolve this issue.
-
-        when(iGuestRepository.save((Guest) any())).thenReturn(1);
-        guestService.addGuest(null);
-    }
 
     /**
      * Method under test: {@link GuestService#removeGuest(Integer)}

@@ -1,5 +1,7 @@
 package com.example.wedding.security.repository;
 
+import com.example.wedding.security.model.Role;
+import com.example.wedding.security.model.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -47,37 +49,38 @@ public class UserRepository {
         return jdbcTemplate.update(sql, id);
     }
 
-    public List<UserDetails> findAll() {
+    public List<UserDto> findAll() {
         String sql = """
                 SELECT * FROM users;
                 """;
 
         return jdbcTemplate.query(
                 sql,
-                (rs, rowNum) -> User.builder()
+                (rs, rowNum) -> UserDto.builder()
+                        .id(rs.getInt("id"))
                         .username(rs.getString("username"))
                         .password(rs.getString("password"))
-                        .roles(rs.getString("role"))
+                        .role(Role.fromString(rs.getString("role")))
                         .build()
         );
     }
 
-    public UserDetails findUser(String username) {
+    public UserDto findUser(String username) {
         String sql = """
                 SELECT * FROM users
                 WHERE username = ?;
                 """;
         try {
-            UserDetails userDetails = jdbcTemplate.queryForObject(
+            return jdbcTemplate.queryForObject(
                     sql,
-                    (rs, rowNum) -> User.builder()
+                    (rs, rowNum) -> UserDto.builder()
+                            .id(rs.getInt("id"))
                             .username(rs.getString("username"))
                             .password(rs.getString("password"))
-                            .roles(rs.getString("role"))
+                            .role(Role.fromString(rs.getString("role")))
                             .build(),
                     username
             );
-            return userDetails;
         } catch (RuntimeException e) {
             log.debug("Could not find user by the name {}", username, e);
         }

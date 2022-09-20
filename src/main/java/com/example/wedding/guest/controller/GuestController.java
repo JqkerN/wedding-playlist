@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Api(tags={"Guest List Controller"})
@@ -31,7 +32,6 @@ public class GuestController {
     }
 
     @ApiOperation(value = "Search for guest with a specific id.")
-
     @GetMapping("/{id}")
     public Guest getGuest(@PathVariable Integer id) {
         return guestService.getGuest(id);
@@ -39,8 +39,8 @@ public class GuestController {
 
     @ApiOperation(value = "Register a guest.")
     @PostMapping
-    public void registerGuest(@Valid @RequestBody RegistrationRequest request) {
-        guestService.addGuest(request);
+    public void registerGuest(@Valid @RequestBody RegistrationRequest request, Principal principal) {
+        guestService.addGuest(request, principal.getName());
     }
 
     @ApiOperation(value = "Unregister a guest by id.")

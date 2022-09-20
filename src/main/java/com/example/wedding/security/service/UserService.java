@@ -1,8 +1,9 @@
 package com.example.wedding.security.service;
 
 import com.example.wedding.exception.UserAlreadyExistException;
-import com.example.wedding.security.Role;
+import com.example.wedding.security.model.Role;
 import com.example.wedding.security.dto.RegistrerUserRequest;
+import com.example.wedding.security.model.UserDto;
 import com.example.wedding.security.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +17,7 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    public List<UserDetails> allUsers() {
+    public List<UserDto> allUsers() {
         return userRepository.findAll();
     }
 

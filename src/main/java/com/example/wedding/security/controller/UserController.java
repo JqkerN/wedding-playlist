@@ -1,6 +1,7 @@
 package com.example.wedding.security.controller;
 
 import com.example.wedding.security.dto.RegistrerUserRequest;
+import com.example.wedding.security.model.UserDto;
 import com.example.wedding.security.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +19,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public List<UserDetails> allUsers(){
+    public List<UserDto> allUsers(){
         return userService.allUsers();
     }
 

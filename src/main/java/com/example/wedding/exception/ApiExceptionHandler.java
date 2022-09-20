@@ -72,4 +72,15 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(apiException, apiException.httpStatus());
     }
 
+    @ExceptionHandler(value = {UserNotFoundException.class})
+    public ResponseEntity<Object> handleApiRequestException(UserNotFoundException e) {
+        log.error(e.getMessage(), e);
+
+        ApiException apiException = new ApiException(
+                e.getMessage(),
+                HttpStatus.BAD_REQUEST,
+                ZonedDateTime.now()
+        );
+        return new ResponseEntity<>(apiException, apiException.httpStatus());
+    }
 }

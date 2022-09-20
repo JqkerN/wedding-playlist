@@ -10,6 +10,7 @@ import com.example.wedding.guest.model.Guest;
 import com.example.wedding.guest.service.GuestService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.security.Principal;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -92,7 +93,7 @@ class GuestControllerTest {
     }
 
     /**
-     * Method under test: {@link GuestController#registerGuest(RegistrationRequest)}
+     * Method under test: {@link GuestController#registerGuest(RegistrationRequest, Principal)}
      */
     @Test
     void testRegisterGuest() throws Exception {
@@ -112,7 +113,7 @@ class GuestControllerTest {
     }
 
     /**
-     * Method under test: {@link GuestController#registerGuest(RegistrationRequest)}
+     * Method under test: {@link GuestController#registerGuest(RegistrationRequest, Principal)}
      */
     @Test
     void testRegisterGuest2() throws Exception {
