@@ -4,11 +4,9 @@ import com.example.wedding.exception.UserNotFoundException;
 import com.example.wedding.guest.dto.RegistrationRequest;
 import com.example.wedding.guest.model.Guest;
 import com.example.wedding.guest.repository.IGuestRepository;
-import com.example.wedding.security.model.UserDto;
-import com.example.wedding.security.repository.UserRepository;
-import com.example.wedding.security.service.UserService;
+import com.example.wedding.user.model.UserDto;
+import com.example.wedding.user.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,15 +1,15 @@
 package com.example.wedding.playlist.repository;
 
-import com.example.wedding.playlist.model.Track;
+import com.example.wedding.playlist.model.SongDto;
 
 import java.util.List;
 
 public interface IPlaylistRepository {
-    int count();
-    int save(Track track);
+    int save(SongDto songDto);
     int deleteById(Integer id);
-    List<Track> findAll();
-    Track findByTitle(String title);
-    Track findById(Integer id);
+    List<SongDto> findAll();
+
+    SongDto findByTitle(String title);
+    SongDto findById(Integer id);
 
 }

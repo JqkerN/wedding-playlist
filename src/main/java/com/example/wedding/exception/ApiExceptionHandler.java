@@ -12,8 +12,8 @@ import java.time.ZonedDateTime;
 @Slf4j
 public class ApiExceptionHandler {
 
-    @ExceptionHandler(value = {TrackAlreadyExistException.class})
-    public ResponseEntity<Object> handleApiRequestException(TrackAlreadyExistException e) {
+    @ExceptionHandler(value = {SongAlreadyExistException.class})
+    public ResponseEntity<Object> handleApiRequestException(SongAlreadyExistException e) {
         log.error(e.getMessage(), e);
 
         ApiException apiException = new ApiException(
@@ -24,8 +24,8 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(apiException, apiException.httpStatus());
     }
 
-    @ExceptionHandler(value = {TrackNotFoundException.class})
-    public ResponseEntity<Object> handleApiRequestException(TrackNotFoundException e) {
+    @ExceptionHandler(value = {SongNotFoundException.class})
+    public ResponseEntity<Object> handleApiRequestException(SongNotFoundException e) {
         log.error(e.getMessage(), e);
 
         ApiException apiException = new ApiException(

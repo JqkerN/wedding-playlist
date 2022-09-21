@@ -1,9 +1,11 @@
 package com.example.wedding.playlist.repository;
 
-import com.example.wedding.playlist.model.Track;
+import com.example.wedding.playlist.model.SongDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,57 +17,51 @@ public class PlaylistRepository implements IPlaylistRepository {
     private final JdbcTemplate jdbcTemplate;
 
     @Override
-    public int count() {
+    public int save(SongDto songDto) {
         String sql = """
-                SELECT COUNT(Id) FROM tracks;
+                INSERT INTO songs(title, artist, albumCover) VALUE(?,?,?);
                 """;
-        Integer count = jdbcTemplate.queryForObject(sql, Integer.class);
-        if (count != null) {
-            return count;
-        }
-        return 0;
-    }
+        KeyHolder keyHolder = new GeneratedKeyHolder();
 
-    @Override
-    public int save(Track track) {
-        String sql = """
-                INSERT INTO tracks(title) VALUE(?);
-                """;
-        return jdbcTemplate.update(sql, track.getTitle());
+        return jdbcTemplate.update(sql, songDto.getTitle(), songDto.getArtist(), songDto.getAlbumCover());
     }
 
     @Override
     public int deleteById(Integer id) {
         String sql = """
-                DELETE FROM tracks WHERE id = ?;
+                DELETE FROM songs WHERE id = ?;
                 """;
         return jdbcTemplate.update(sql, id);
     }
 
     @Override
-    public List<Track> findAll() {
+    public List<SongDto> findAll() {
         String sql = """
-                SELECT * FROM tracks;
+                SELECT * FROM songs;
                 """;
         return jdbcTemplate.query(sql,
-                (rs, rowNum) -> Track.builder()
+                (rs, rowNum) -> SongDto.builder()
                         .id(rs.getInt("id"))
                         .title(rs.getString("title"))
+                        .artist(rs.getString("artist"))
+                        .albumCover(rs.getString("albumCover"))
                         .build()
         );
     }
 
     @Override
-    public Track findByTitle(String title) {
+    public SongDto findByTitle(String title) {
         String sql = """
-                SELECT * FROM tracks WHERE title = ?;
+                SELECT * FROM songs WHERE title = ?;
                 """;
         try {
             return jdbcTemplate.queryForObject(
                     sql,
-                    (rs, rowNum) -> Track.builder()
+                    (rs, rowNum) -> SongDto.builder()
                             .id(rs.getInt("id"))
                             .title(rs.getString("title"))
+                            .artist(rs.getString("artist"))
+                            .albumCover(rs.getString("albumCover"))
                             .build(),
                     title
             );
@@ -76,17 +72,19 @@ public class PlaylistRepository implements IPlaylistRepository {
     }
 
     @Override
-    public Track findById(Integer id) {
+    public SongDto findById(Integer id) {
         String sql = """
-                SELECT * FROM tracks WHERE id = ?;
+                SELECT * FROM songs WHERE id = ?;
                 """;
 
         try {
             return jdbcTemplate.queryForObject(
                     sql,
-                    (rs, rowNum) -> Track.builder()
+                    (rs, rowNum) -> SongDto.builder()
                             .id(rs.getInt("id"))
                             .title(rs.getString("title"))
+                            .artist(rs.getString("artist"))
+                            .albumCover(rs.getString("albumCover"))
                             .build(),
                     id
             );
