@@ -11,16 +11,15 @@ import java.util.List;
 @Repository
 @AllArgsConstructor
 @Slf4j
-
 public class GuestRepository implements IGuestRepository{
     private final JdbcTemplate jdbcTemplate;
 
     @Override
     public int save(Guest guest) {
         String sql = """
-                INSERT INTO guests(fullName) VALUE(?);
+                INSERT INTO guests(fullName, userId) VALUE(?,?);
                 """;
-        return jdbcTemplate.update(sql, guest.getFullName());
+        return jdbcTemplate.update(sql, guest.getFullName(), guest.getUserId());
     }
 
     @Override
@@ -39,6 +38,7 @@ public class GuestRepository implements IGuestRepository{
         return jdbcTemplate.query(sql,
                 (rs, rowNum) -> Guest.builder()
                         .id(rs.getInt("id"))
+                        .userId(rs.getInt("userId"))
                         .fullName(rs.getString("fullName"))
                         .build()
         );
@@ -55,6 +55,7 @@ public class GuestRepository implements IGuestRepository{
                     sql,
                     (rs, rowNum) -> Guest.builder()
                             .id(rs.getInt("id"))
+                            .userId(rs.getInt("userId"))
                             .fullName(rs.getString("fullName"))
                             .build(),
                     id
@@ -76,6 +77,7 @@ public class GuestRepository implements IGuestRepository{
                     sql,
                     (rs, rowNum) -> Guest.builder()
                             .id(rs.getInt("id"))
+                            .userId(rs.getInt("userId"))
                             .fullName(rs.getString("fullName"))
                             .build(),
                     fullName

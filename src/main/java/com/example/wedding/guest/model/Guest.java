@@ -7,12 +7,14 @@ import lombok.Getter;
 @Getter
 public class Guest {
     private Integer id;
+    private Integer userId;
     private String fullName;
 
     @Override
     public String toString() {
         return "Guest{" +
                 "id=" + id +
+                ", userId=" + userId +
                 ", fullName='" + fullName + '\'' +
                 '}';
     }
